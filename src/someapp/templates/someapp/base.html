@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<title>{% block title %}Главная страница{% endblock %}</title>
+<meta charset="UTF-8">
+
+{% block css_def %}
+{% endblock %}
+
+{% block js_def %}
+{% endblock %}
+</head>
+<body>
+<div class="container-fluid wrapper">
+    <div id="header" class="row">
+    {% block logo %}
+    {% endblock %}
+    
+    {% block global-menu %}
+        <a href="{% url 'index_page' %}">Main</a>
+    {% endblock %}
+    </div>
+    
+    <div id="main" class="row">
+    {% block main %}
+    {% block leftside-menu %}
+    {% endblock %}
+    {% block content %}
+    {% endblock %}
+    {% endblock %}
+    </div>
+    <div id="footer" class="row">
+       
+    </div>
+</div>
+</body>
+</html>

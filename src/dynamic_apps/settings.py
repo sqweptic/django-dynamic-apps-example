@@ -1,7 +1,7 @@
+from __future__ import absolute_import
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PROJECT_DIR = 1
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
@@ -9,13 +9,16 @@ TEMPLATE_DEBUG = DEBUG
 ALLOWED_HOSTS = ['*']
 
 
+
 INSTALLED_APPS = (
-    'django.contrib.admin',
+#     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    'someapp',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -72,3 +75,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
+
+try:
+    from .settings_private import *
+except ImportError:
+    print('Private settings import error')
+
+
