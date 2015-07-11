@@ -1,5 +1,8 @@
 from __future__ import absolute_import
+
 import os
+
+from dynamic_apps.utils import import_module_settings, find_dynamic_modules
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -52,11 +55,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'dynamic_apps.wsgi.application'
 
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': 'project',
+        'NAME': 'dynapp_e',
+        'USER': 'secret',
+        'PASSWORD': 'private'
     }
 }
 
@@ -81,4 +86,15 @@ try:
 except ImportError:
     print('Private settings import error')
 
+for module in find_dynamic_modules(os.path.abspath(__file__)):
+    import_module_settings(module, locals())
 
+
+
+
+
+
+    
+
+# except:
+# print('error')
