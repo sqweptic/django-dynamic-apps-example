@@ -4,3 +4,4 @@ log
 .pydevproject
 .settings
 src/dynamic_apps/settings_*
+__pycache__*

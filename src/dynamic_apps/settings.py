@@ -11,8 +11,6 @@ TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = ['*']
 
-
-
 INSTALLED_APPS = (
 #     'django.contrib.admin',
     'django.contrib.auth',
@@ -81,20 +79,20 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 
+
+SPECIFIC_SETTINGS_VAR = {
+    'rororo': [
+        {
+            'power_property': True
+        },
+    ]
+}
+
 try:
     from .settings_private import *
 except ImportError:
-    print('Private settings import error')
+    pass
 
 for module in find_dynamic_modules(os.path.abspath(__file__)):
     import_module_settings(module, locals())
 
-
-
-
-
-
-    
-
-# except:
-# print('error')

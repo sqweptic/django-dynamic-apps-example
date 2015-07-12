@@ -20,6 +20,9 @@
     
     {% block global-menu %}
         <a href="{% url 'index_page' %}">Main</a>
+        {% if 'dynamicapp' in modules %}
+            <a href="{% url 'dynamicapp_page' %}">Module</a>
+        {% endif %}
     {% endblock %}
     </div>
     
