@@ -20,8 +20,12 @@ def find_dynamic_modules(project_settings_path):
             module_import_name = '.'.join((settings_dir_name, 
                                            MODULES_DIR_NAME, 
                                            module_name))
-            module = importlib.import_module(module_import_name)
-            yield module
+            try:
+                module = importlib.import_module(module_import_name)
+            except ImportError:
+                pass
+            else:
+                yield module
 
 def import_module_settings(module, _locals = {}):
     if not hasattr(module, MODULE_SETTINGS_NAME):
@@ -43,10 +47,10 @@ def import_module_settings(module, _locals = {}):
                 if isinstance(inst, list) and \
                    isinstance(_locals[var_name], list):
                         _locals[var_name].extend(inst)
-                if isinstance(inst, dict) and \
+                elif isinstance(inst, dict) and \
                    isinstance(_locals[var_name], dict):
                         _locals[var_name].update(inst)
-                if isinstance(inst, tuple) and \
+                elif isinstance(inst, tuple) and \
                    isinstance(_locals[var_name], tuple):
                         _locals[var_name] += inst
             else:
